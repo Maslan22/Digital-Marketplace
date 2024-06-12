@@ -1,6 +1,8 @@
 "use server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { z } from "zod";
+import prisma from "./lib/db";
+import {type CategoryTypes } from "@prisma/client";
 
 export type State = {
   status: "error" | "success" | undefined;
@@ -53,6 +55,19 @@ export async function SellProduct(prevState: any, formData: FormData) {
 
     return state;
   }
+
+  await prisma.product.create({
+    data: {
+        name: validateFields.data.name,
+        category: validateFields.data.category as CategoryTypes,
+        smallDescription: validateFields.data.smallDescription,
+        price: validateFields.data.price,
+        images: validateFields.data.images,
+        productFile: validateFields.data.productFile,
+        userId: user.id,
+        description: JSON.parse(validateFields.data.description),
+    },
+  })
 
   const state: State = {
     status: "success",

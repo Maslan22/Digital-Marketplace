@@ -20,6 +20,7 @@ import { useFormState } from "react-dom";
 import { SellProduct, State } from "../actions";
 import { toast } from "sonner";
 import { Submitbutton } from "../components/SubmitButtons";
+import { redirect } from "next/navigation";
 
 export default function SellRoute() {
   const initialState: State = { message: "", status: undefined };
@@ -31,6 +32,7 @@ export default function SellRoute() {
   useEffect(() => {
     if (state.status === "success") {
       toast.success(state.message);
+      redirect("/")
     } else if (state.status === "error") {
       toast.error(state.message);
     }
