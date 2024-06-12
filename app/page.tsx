@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { NewestProducts } from "./components/NewestProducts";
+import { ProductRow } from "./components/ProductRow";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
           buyers alike.{" "}
         </p>
       </div>
-      <NewestProducts />
+      <ProductRow category="newest"/>
     </section>
   );
 }
