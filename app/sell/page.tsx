@@ -16,10 +16,11 @@ import { TipTapEditor } from "../components/Editor";
 
 import { Button } from "@/components/ui/button";
 import { UploadDropzone } from "../lib/uploadthing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JSONContent } from "@tiptap/react";
 import { useFormState } from "react-dom";
 import { SellProduct, State } from "../actions";
+import { toast } from "sonner";
 
 export default function SellRoute() {
   const initialState: State = { message: "", status: undefined };
@@ -28,7 +29,14 @@ export default function SellRoute() {
   const [images, setImages] = useState<null | string[]>(null);
   const [productFile, setProductFile] = useState<null | string>(null);
 
-  console.log(state?.errors);
+  useEffect(() => {
+    if(state.status === "success") {
+      toast.success(state.message);
+    }else if(state.status === "error") {
+      toast.error(state.message);
+    }
+  }, [state]);
+
   return (
     <section className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-14">
       <Card>
@@ -111,11 +119,11 @@ export default function SellRoute() {
               <UploadDropzone
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
-                  console.log("Client upload complete:", res); // Debugging
                   setImages(res.map((item) => item.url));
+                  toast.success('Your Images uploaded successfully');
                 }}
                 onUploadError={(error: Error) => {
-                  throw new Error(`${error}`);
+                  toast.error('Something went wrong!, Please try again');
                 }}
               />
               {state?.errors?.["images"]?.[0] && (
@@ -134,13 +142,12 @@ export default function SellRoute() {
               <Label>Product File</Label>
               <UploadDropzone
                 onClientUploadComplete={(res) => {
-                  console.log("Client upload complete:", res); // Debugging log
                   setProductFile(res[0].url);
+                  toast.success('Your Product file has been uploaded successfully..!');
                 }}
                 endpoint="productFileUpload"
                 onUploadError={(error: Error) => {
-                  console.error("Upload error:", error); // Debugging log
-                  throw new Error(`${error}`);
+                  toast.error('Something went wrong!, Please try again');
                 }}
               />
               {state?.errors?.["productFile"]?.[0] && (
