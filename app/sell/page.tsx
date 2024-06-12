@@ -39,7 +39,7 @@ export default function SellRoute() {
   }, [state]);
 
   return (
-    <section className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-14">
+    <section className="max-w-7xl mx-auto px-4 md:px-8 mb-14">
       <Card>
         <form action={formAction}>
           <CardHeader>
@@ -165,7 +165,7 @@ export default function SellRoute() {
             </div>
           </CardContent>
           <CardFooter className="mt-5">
-            <Submitbutton />
+            <Submitbutton title="Create your Product" />
           </CardFooter>
         </form>
       </Card>
