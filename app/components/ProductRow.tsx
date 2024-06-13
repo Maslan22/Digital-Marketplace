@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import prisma from "../lib/db";
 import { ProductCard } from "./ProductCard";
 import Link from "next/link";
+import { link } from "fs";
 
 interface iAppProps {
   category: "newest" | "templates" | "uikits" | "icons";
@@ -27,6 +28,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Icons",
+        link: "/products/icon",
       };
     }
     case "newest": {
@@ -47,6 +49,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Newest Products",
+        link: "/products/all",
       };
     }
     case "templates": {
@@ -67,6 +70,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Templates",
+        link: "/products/template"
       };
     }
     case "uikits": {
@@ -87,6 +91,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "UI Kits",
+        link: "/products/uikit",
       };
     }
     default: {
@@ -101,10 +106,10 @@ export async function ProductRow({ category }: iAppProps) {
     <section className="mt-12">
       <div className="md:flex md:items-center md:justify-between">
         <h2 className="text-2xl font-extrabold tracking-tighter">
-          Newest Products
+          {data.title}
         </h2>
         <Link
-          href="#"
+          href={data.link}
           className="text-sm hidden font-medium text-primary hover:text-primary/70 md:block"
         >
           All Products <span>&rarr;</span>
@@ -112,7 +117,7 @@ export async function ProductRow({ category }: iAppProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 mt-4 gap-10">
-        {data.data.map((product) => (
+        {data.data. map((product) => (
           <ProductCard
             images={product.images}
             key={product.id}
