@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import prisma from "../lib/db";
-import { ProductCard } from "./ProductCard";
+import { LoadingProductCard, ProductCard } from "./ProductCard";
 import Link from "next/link";
 import { link } from "fs";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface iAppProps {
   category: "newest" | "templates" | "uikits" | "icons";
@@ -70,7 +72,7 @@ async function getData({ category }: iAppProps) {
       return {
         data: data,
         title: "Templates",
-        link: "/products/template"
+        link: "/products/template",
       };
     }
     case "uikits": {
@@ -100,10 +102,20 @@ async function getData({ category }: iAppProps) {
   }
 }
 
-export async function ProductRow({ category }: iAppProps) {
-  const data = await getData({ category });
+export function ProductRow({ category }: iAppProps) {
   return (
     <section className="mt-12">
+      <Suspense fallback={<LoadingState />}>
+        <LoadRows category={category} />
+      </Suspense>
+    </section>
+  );
+}
+
+async function LoadRows({ category }: iAppProps) {
+  const data = await getData({ category });
+  return (
+    <>
       <div className="md:flex md:items-center md:justify-between">
         <h2 className="text-2xl font-extrabold tracking-tighter">
           {data.title}
@@ -117,7 +129,7 @@ export async function ProductRow({ category }: iAppProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 mt-4 gap-10">
-        {data.data. map((product) => (
+        {data.data.map((product) => (
           <ProductCard
             images={product.images}
             key={product.id}
@@ -128,6 +140,19 @@ export async function ProductRow({ category }: iAppProps) {
           />
         ))}
       </div>
-    </section>
+    </>
   );
+}
+
+function LoadingState() {
+    return (
+        <div>
+            <Skeleton className="h-8 w-56" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-10 lg:grid-cols-3">
+                <LoadingProductCard />
+                <LoadingProductCard />
+                <LoadingProductCard />
+            </div>
+        </div>
+    )
 }
