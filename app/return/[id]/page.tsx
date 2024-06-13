@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-export default function SuccessRoute() {
+export default function ReturnUrlStripe() {
   return (
     <section className="w-full min-h-[80vh] flex items-center justify-center">
       <Card className="w-[350px]">
@@ -13,11 +13,11 @@ export default function SuccessRoute() {
           </div>
           <div className="mt-3 text-center sm:mt-5 w-full">
             <h3 className="text-lg leading-6 font-medium">
-              Payment Successful
+              Linking was Successful
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
               {
-                "Congrats to your purchase! Please check your email for further instructions."
+                "Congrats on linking your account to Maslan UI. You can now start selling your products!"
               }
             </p>
 
