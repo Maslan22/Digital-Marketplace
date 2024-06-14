@@ -178,11 +178,11 @@ export async function BuyProduct(formData: FormData) {
     success_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/payment/success`
-        : "https://digital-marketplace-mocha.vercel.app/payment/success",
+        : "https://maslanui.vercel.app/payment/success",
     cancel_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/payment/cancel`
-        : "https://digital-marketplace-mocha.vercel.app/payment/cancel",
+        : "https://maslanui.vercel.app/payment/cancel",
   });
 
   return redirect(session.url as string);
@@ -210,11 +210,11 @@ export async function CreateStripeAccountLink() {
     refresh_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/billing`
-        : "https://digital-marketplace-mocha.vercel.app/billing",
+        : "https://maslanui.vercel.app//billing",
     return_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/return/${data?.connectedAccountId}`
-        : `https://digital-marketplace-mocha.vercel.app/return/${data?.connectedAccountId}`,
+        : `https://maslanui.vercel.app/return/${data?.connectedAccountId}`,
     type: "account_onboarding",
   });
 
