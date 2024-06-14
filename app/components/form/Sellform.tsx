@@ -1,7 +1,13 @@
 "use client";
 
 import { SellProduct, type State } from "@/app/actions";
-import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { type JSONContent } from "@tiptap/react";
@@ -25,7 +31,6 @@ export function SellForm() {
   useEffect(() => {
     if (state.status === "success") {
       toast.success(state.message);
-      redirect("/");
     } else if (state.status === "error") {
       toast.error(state.message);
     }
