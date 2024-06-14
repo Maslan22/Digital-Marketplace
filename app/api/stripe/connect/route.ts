@@ -1,5 +1,6 @@
 import prisma from "@/app/lib/db";
 import { stripe } from "@/app/lib/stripe";
+
 import { headers } from "next/headers";
 
 export async function POST(req: Request) {
@@ -16,7 +17,7 @@ export async function POST(req: Request) {
       process.env.STRIPE_CONNECT_WEBHOOK_SECRET as string
     );
   } catch (error: unknown) {
-    return new Response("Webhook Error", { status: 400 });
+    return new Response("webhook error", { status: 400 });
   }
 
   switch (event.type) {
@@ -38,9 +39,9 @@ export async function POST(req: Request) {
       break;
     }
     default: {
-        console.log(`Unhandled event`);
+      console.log("unhandled event");
     }
   }
 
-  return new Response(null, { status: 200});
+  return new Response(null, { status: 200 });
 }
