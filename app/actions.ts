@@ -209,7 +209,7 @@ export async function CreateStripeAccountLink() {
     return_url:
       process.env.NODE_ENV === "development"
         ? `http://localhost:3000/return/${data?.connectedAccountId}`
-        : 'https://digital-marketplace-mocha.vercel.app/return/${data?.connectedAccountId}',
+        : `https://digital-marketplace-mocha.vercel.app/return/${data?.connectedAccountId}`,
     type: "account_onboarding",
   });
 
