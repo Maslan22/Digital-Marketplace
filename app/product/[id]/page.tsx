@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(id: string) {
   const data = await prisma.product.findUnique({
@@ -44,6 +45,7 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
+  noStore();
   const data = await getData(params.id);
   return (
     <section className="max-w-7xl mx-auto px-4 lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
