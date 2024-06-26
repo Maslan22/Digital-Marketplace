@@ -42,11 +42,17 @@ Server side implementation
 Resources used:
 
 Next.js: https://nextjs.org
+
 Kinde: https://dub.sh/xeU8r3v
+
 Tailwind.css: https://tailwindcss.com
+
 Shadcn/UI: https://ui.shadcn.com
+
 Stripe: https://stripe.com
+
 Prisma: https://prisma.io
+
 Supabase: https://supabase.com
 
 ```
