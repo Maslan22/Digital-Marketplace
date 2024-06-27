@@ -50,7 +50,7 @@ export async function GET() {
 
   return NextResponse.redirect(
     process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
+      ? "http://localhost:3000/"
       : "https://maslanui.vercel.app/"
   );
 }
